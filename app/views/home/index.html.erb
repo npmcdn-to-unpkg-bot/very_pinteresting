@@ -1,8 +1,5 @@
-<h1>Very Pinteresting!</h1>
-<% if user_signed_in? %>
-  <%= link_to 'Edit Profile', edit_user_registration_path %> |
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Login', new_user_session_path %> |
-  <%= link_to 'Sign Up', new_user_registration_path %>
-<% end %>
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p>Text goes here.</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
