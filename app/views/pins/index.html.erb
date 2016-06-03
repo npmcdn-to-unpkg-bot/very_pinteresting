@@ -1,9 +1,9 @@
-<div class = "row">
+<div class = "row pinterest-grid">
   <% @pins.each do |pin| %>
-    <div class = "col-md-3">
+    <div class = "col-md-3 pin-item">
       <div class="panel panel-default pin">
         <div class="panel-body">
-          <%= image_tag pin.pin_image.url(:medium), class: 'img-responsive' %>
+          <%= link_to image_tag(pin.pin_image.url(:medium), class: 'img-responsive'), pin %>
         </div>
         <div class="panel-footer">
           <p><%= pin.description %></p>
