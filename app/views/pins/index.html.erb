@@ -7,7 +7,16 @@
         </div>
         <div class="panel-footer">
           <p><%= pin.description %></p>
-          <div><%= link_to 'Edit', edit_pin_path(pin) %> | <%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+          <% if pin.user == current_user %>
+            <div>
+              <%= link_to 'Edit', edit_pin_path(pin) %> |
+              <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% else %>
+            <div>
+              <%= link_to 'Repost', repost_pin_path(pin), method: :post, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

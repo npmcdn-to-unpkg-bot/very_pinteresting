@@ -58,6 +58,11 @@ class PinsController < ApplicationController
     end
   end
 
+  def repost
+    @pin = Pin.find(params[:id]).repost(current_user)
+    redirect_to pins_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
