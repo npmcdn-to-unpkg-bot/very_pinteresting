@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-  before_action :set_pin, only: [:show, :edit, :update, :destroy]
+  before_action :set_pin, only: [:show, :edit, :update, :destroy, :repost, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -59,8 +59,19 @@ class PinsController < ApplicationController
   end
 
   def repost
-    @pin = Pin.find(params[:id]).repost(current_user)
+    @pin.repost(current_user)
     redirect_to pins_path
+  end
+
+  def like
+    @like = @pin.likes.build(user_id: current_user.id)
+    if @like.save
+      flash[:notice] =  "You liked a pin from #{@pin.user.username}!"
+      redirect_to(pins_path)
+    else
+      flash[:notice] =  "You have already liked this pin!"
+      redirect_to(pins_path)
+    end
   end
 
   private
@@ -72,7 +83,7 @@ class PinsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def pin_params
-    params.require(:pin).permit(:description, :pin_image)
+    params.require(:pin).permit(:description, :pin_image, :board_id)
   end
 
   def correct_user

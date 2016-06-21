@@ -8,14 +8,34 @@
         <div class="panel-footer">
           <p><strong><%= pin.user.username %></strong></p>
           <p><%= pin.description %></p>
+          <div>
+            <%= form_for([pin, pin.comments.build]) do |f| %>
+              <p>
+                <%= f.label :comment %><br>
+                <%= f.text_area :body %>
+              </p>
+              <p>
+                <%= f.submit %>
+              </p>
+            <% end %>
+            <% pin.comments.each do |comment| %>
+              <p>
+                <p>Comment:</p>
+                <%= comment.body %>
+              </p>
+            <% end %>
+          </div>
           <% if pin.user == current_user %>
             <div>
+              <%= pluralize(pin.likes.count, "like") %> |
               <%= link_to 'Edit', edit_pin_path(pin) %> |
               <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
           <% else %>
             <div>
-              <%= link_to 'Repost', repost_pin_path(pin), method: :post, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Repost', repost_pin_path(pin), method: :post, data: { confirm: 'Are you sure?' } %> |
+              <%= link_to 'Like', like_pin_path(pin), method: :post %> |
+              <%= pluralize(pin.likes.count, "like") %>
             </div>
           <% end %>
         </div>

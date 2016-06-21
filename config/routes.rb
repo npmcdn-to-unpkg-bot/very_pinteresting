@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  resources :boards
   resources :pins do
     resources :comments
     member do
       post '/repost' => 'pins#repost'
+      post '/like' => 'pins#like'
     end
   end
-  
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

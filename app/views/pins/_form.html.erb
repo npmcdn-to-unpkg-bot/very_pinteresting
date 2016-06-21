@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class = "form-group">
+    <%= f.label :board %>
+    <%= f.select :board_id, options_from_collection_for_select(current_user.boards, "id", "title"), class: 'form-control' %>
+  </div>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
