@@ -12,9 +12,9 @@
     <h2>Comments</h2>
 
     <% @pin.comments.each do |comment| %>
-      <p><%= comment.body %></p>
+
       <p>
-        <strong><%= comment.user.username %></strong>
+        <strong><%= comment.user.username %></strong> : <%= comment.body %>
       </p>
     <% end %>
 

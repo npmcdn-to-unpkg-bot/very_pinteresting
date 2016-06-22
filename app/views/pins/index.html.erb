@@ -19,11 +19,9 @@
                 <%= f.submit %>
               </p>
             <% end %>
+            <p>Comments:</p>
             <% pin.comments.each do |comment| %>
-              <p>
-                <p>Comment:</p>
-                <%= comment.body %>
-              </p>
+              <p><%= comment.body %></p>
             <% end %>
           </div>
           <% if pin.user == current_user %>
