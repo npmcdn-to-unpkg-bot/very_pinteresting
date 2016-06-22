@@ -13,13 +13,15 @@
 
   <tbody>
     <% @boards.each do |board| %>
-      <tr>
-        <td><%= board.user_id %></td>
-        <td><%= board.title %></td>
-        <td><%= link_to 'Show', board %></td>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div>
+        <tr>
+          <td><%= board.user_id %></td>
+          <td><%= board.title %></td>
+          <td><%= link_to 'Show', board %></td>
+          <td><%= link_to 'Edit', edit_board_path(board) %></td>
+          <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      </div>
     <% end %>
   </tbody>
 </table>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :boards
+  
   resources :pins do
     resources :comments
     member do

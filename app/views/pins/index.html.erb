@@ -6,7 +6,8 @@
           <%= link_to image_tag(pin.pin_image.url(:medium), class: 'img-responsive'), pin %>
         </div>
         <div class="panel-footer">
-          <p><strong><%= pin.user.username %></strong></p>
+          <p><strong><%= link_to pin.user.username, user_path(pin.user.username) %></strong></p>
+          <small>Posted in <%= link_to pin.board.title, pin.board %></small>
           <p><%= pin.description %></p>
           <div>
             <%= form_for([pin, pin.comments.build]) do |f| %>
