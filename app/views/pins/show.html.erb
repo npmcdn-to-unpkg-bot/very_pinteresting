@@ -7,12 +7,9 @@
 
     <%= @pin.description %>
 
-
-
     <h2>Comments</h2>
 
     <% @pin.comments.each do |comment| %>
-
       <p>
         <strong><%= comment.user.username %></strong> : <%= comment.body %>
       </p>
@@ -26,10 +23,9 @@
           <%= f.text_area :body %>
         </p>
         <p>
-          <%= f.submit %>
+          <%= f.submit class: 'btn btn-success'%>
         </p>
       <% end %>
     <% end %>
-
-</div>
+  </div>
 </div>

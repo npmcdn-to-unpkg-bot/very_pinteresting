@@ -1,48 +1,6 @@
-<div>
-  <%= image_tag @user.avatar.url(:thumb) %>
-</div>
 <h3><%= @user.username %></h3>
-<p><%= @user.bio %></p>
 
 <h2>My Boards</h2>
-<div class = "row-pinterest-grid">
-  <% @user.pins.each do |pin| %>
-    <div class = "col-md-3 pin-item">
-      <div class = "panel panel-default pin">
-        <div class = "panel-body">
-        </div>
-        <div class = "panel-footer">
-          <p><%= board.title %></p>
-          <% if board.user == current_user %>
-            <div>
-              <%= link_to 'Edit', edit_pin_path(pin) %> |
-              <%= link_to 'Delete', board, :method :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <% @user.boards.each do |board| %>
+    <p><%= link_to board.title, board %></p>
   <% end %>
-
-<h2>My Pins</h2>
-<div class = "row-pinterest-grid">
-  <% @user.pins.each do |pin| %>
-    <div class = "col-md-3 pin-item">
-      <div class = "panel panel-default pin">
-        <div class = "panel-body">
-          <%= link_to image_tag(pin.pin_image.url(:medium)), pin %>
-        </div>
-        <div class = "panel-footer">
-          <p><strong><%= link_to pin.user.username, user_path(pin.user.username) %></strong></p>
-          <p><%= pin.description %></p>
-          <% if pin.user == current_user %>
-            <div>
-              <%= link_to 'Edit', edit_pin_path(pin) %> |
-              <%= link_to 'Delete', pin, :method :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>

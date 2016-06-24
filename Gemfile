@@ -16,6 +16,10 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
 
+gem 'pry'
+
+gem 'pry-byebug'
+
 gem 'aws-sdk', '< 2.0'
 
 gem 'devise'

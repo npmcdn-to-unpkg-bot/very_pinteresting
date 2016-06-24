@@ -1,14 +1,47 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @board.title %></h2>
 
-<p>
-  <strong>User:</strong>
-  <%= @board.user_id %>
-</p>
+<div class = "row pinterest-grid">
 
-<p>
-  <strong>Title:</strong>
-  <%= @board.title %>
-</p>
-
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
+  <% @board.pins.each do |pin| %>
+    <div class = "col-md-3 pin-item">
+      <div class="panel panel-default pin">
+        <div class="panel-body">
+          <%= link_to image_tag(pin.pin_image.url(:medium), class: 'img-responsive'), pin %>
+        </div>
+        <div class="panel-footer">
+          <p><%= pin.description %></p>
+          <p><strong><%= link_to pin.user.username, user_path(pin.user.username) %></strong></p>
+          <small>Posted in <%= link_to pin.board.title, pin.board %></small>
+          <p>Comments:</p>
+          <% pin.comments.each do |comment| %>
+            <p><%= comment.body %></p>
+          <% end %>
+          <div>
+            <%= form_for([pin, pin.comments.build]) do |f| %>
+              <p>
+                <%= f.label :comment %><br>
+                <%= f.text_area :body %>
+              </p>
+              <p>
+                <%= f.submit class: 'btn btn-success'%>
+              </p>
+            <% end %>
+          </div>
+          <% if pin.user == current_user %>
+            <div>
+              <%= pluralize(pin.likes.count, "like") %> |
+              <%= link_to 'Edit', edit_pin_path(pin) %> |
+              <%= link_to 'Delete', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% else %>
+            <div>
+              <%= link_to 'Repost', repost_pin_path(pin), method: :post, data: { confirm: 'Are you sure?' } %> |
+              <%= link_to 'Like', like_pin_path(pin), method: :post %> |
+              <%= pluralize(pin.likes.count, "like") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
